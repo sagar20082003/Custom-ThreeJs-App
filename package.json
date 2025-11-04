@@ -1,0 +1,18 @@
+{
+  "name": "create_threejs_app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite built"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "lil-gui": "^0.21.0",
+    "three": "^0.180.0",
+    "vite": "^7.1.12"
+  }
+}

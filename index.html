@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create custom three js app</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="controls">
+        <div class="coordinate-1">
+            <h3>starting coordinate</h3>
+            <input type="number" placeholder="x1" id="x1">
+            <input type="number" placeholder="y1" id="y1">
+            <input type="number" placeholder="z1" id="z1">
+        </div>
+        <div class="coordinate-2">
+            <h3>Ending coordinate</h3>
+            <input type="number" placeholder="x2" id="x2">
+            <input type="number" placeholder="y2" id="y2">
+            <input type="number" placeholder="z3" id="z2">
+        </div>
+        <div class="Cylinder-Controlar">
+            <h3>Cylinder-Controlar</h3>
+            <input type="number" placeholder="Base width" id="base-width" value="0.2">
+            <input type="number" placeholder="Top width" id="top-width" value="0.2">
+            <!-- <input type="number" placeholder="Height" id="height"> -->
+        </div>
+        <!-- start -->
+        <div id="label-start" class="label"></div>
+        <div id="label-end" class="label"></div>
+        <!-- end -->
+        <button id="btn">Draw</button>
+
+    </div>
+    <canvas class="webgl"></canvas>
+
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>
