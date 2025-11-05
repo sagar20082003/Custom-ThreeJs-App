@@ -83,29 +83,45 @@ window.addEventListener("click", () => {
     modalContainer.appendChild(close)
     document.body.appendChild(modalDive);
     console.log(modalDive)
-    close.addEventListener("click",()=>modalDive.remove())
+    close.addEventListener("click", () => modalDive.remove())
   }
-  
 
-  //   cylinder.data = {
-  //   staring: { x1, y1, z1 },
-  //   ending: { x2, y2, z2 },
-  //   BaseRadius: BaseWidth,
-  //   TopRadius: TopWidth,
-  //   height: distance
-
-  // }
-
-  //   <div class="modal">
-  //     <div class="modal-content">
-  //         <h2>Glass Modal</h2>
-  //         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit dignissimos id sapiente commodi.</p>
-  //         <button class="close-btn">Close</button>
-  //     </div>
-  // </div>
 })
-
 let cylinder;
+
+// for get valid radius
+
+const getValidRadius = (inputValue) => {
+  let value = Number(inputValue)
+  if (isNaN(value)) return value = 0.2
+  if (value < 0) value = Math.abs(value);
+  if (value < 0.001) value = 0.001;
+  if (value > 100) value = 100;
+  return value;
+}
+// create new geometry
+
+const updateNewGeometry = () => {
+  if (!cylinder) return;
+
+  let BaseWidth = getValidRadius(document.getElementById("base-width").value);
+  let TopWidth = getValidRadius(document.getElementById("top-width").value);
+
+  const height = cylinder.data.height;
+
+  const newGeo = new THREE.CylinderGeometry(BaseWidth, TopWidth, height, 32);
+
+  cylinder.geometry.dispose();
+  cylinder.geometry = newGeo;
+
+  cylinder.data.BaseRadius = BaseWidth;
+  cylinder.data.TopRadius = TopWidth;
+};
+
+
+document.getElementById("base-width").addEventListener("input", updateNewGeometry);
+document.getElementById("top-width").addEventListener("input", updateNewGeometry);
+
 document.getElementById("btn").addEventListener("click", () => {
   const x1 = Number(document.getElementById("x1").value);
   const y1 = Number(document.getElementById("y1").value);
@@ -115,8 +131,8 @@ document.getElementById("btn").addEventListener("click", () => {
   const y2 = Number(document.getElementById("y2").value);
   const z2 = Number(document.getElementById("z2").value);
 
-  const BaseWidth = Number(document.getElementById("base-width").value);
-  const TopWidth = Number(document.getElementById("top-width").value);
+  let BaseWidth = getValidRadius(document.getElementById("base-width").value)
+  let TopWidth = getValidRadius(document.getElementById("top-width").value)
 
   const start = new THREE.Vector3(x1, y1, z1);
   const end = new THREE.Vector3(x2, y2, z2);
@@ -124,10 +140,6 @@ document.getElementById("btn").addEventListener("click", () => {
   const distance = start.distanceTo(end);
   const midpoint = new THREE.Vector3().addVectors(start, end).multiplyScalar(0.5);
 
-  // const startingLevel = document.getElementById("label-start")
-  // const endingingLevel = document.getElementById("label-end")
-  // startingLevel.position.copy(start)
-  // endingingLevel.position.copy(end)
 
   const geometry = new THREE.CylinderGeometry(BaseWidth, TopWidth, distance, 32);
   const material = new THREE.MeshStandardMaterial({ color: 0x00ffff });
